@@ -29,11 +29,23 @@ class Kitchen extends React.Component {
     })
   }
 
+  logout = () => {
+    this.props.history.push(`/`)
+  }
+
   orderReady = (key) => {
     const orderClicked = this.state.orders.filter(item => {
       return item.order.timeStamp === key
     })
-    console.log(orderClicked)
+    orderClicked[0].order.done = true;
+    const newOrders = this.state.orders.map(item => {
+      if (item.order.timeStamp === key) item.order.done = true;
+      return item
+    })
+    this.setState({
+      orders: newOrders.filter(item => item.order.done === false)
+    })
+    database.collection('orders').doc(orderClicked[0].id).set({ ...orderClicked[0].order })
   }
 
   render() {
@@ -49,13 +61,13 @@ class Kitchen extends React.Component {
         }
       })
       return (
-        <div key={elem.order.timeStamp} className="Kitchen-order p-3 m-3">
+        <div key={elem.order.timeStamp} className="Kitchen-order">
           <h3>{elem.order.client}</h3>
           <table className="table table-text-light">
             <thead>
               <tr>
                 <th scope="col">Item</th>
-                <th scope="col">Quantidade</th>
+                <th scope="col">Quant.</th>
               </tr>
             </thead>
             <tbody>
@@ -73,12 +85,10 @@ class Kitchen extends React.Component {
 
     return (
       <div className="App" >
-        <Header />
+        <Header server="cozinha" logout={this.logout} />
 
-        <div className="d-flex container flex-wrap m-0 row">
-          <div>
-            {orders}
-          </div>
+        <div className="Kitchen">
+          {orders}
         </div >
       </div>
     );

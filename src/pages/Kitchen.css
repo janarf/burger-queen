@@ -1,6 +1,15 @@
+.Kitchen{
+  font-family: 'Roboto', sans-serif;
+background-color: #E6D1CA;
+display: flex;
+flex-wrap: wrap;
+}
 .Kitchen-order{
   background-color: #1D110D;
   color:#E6D1CA;
+  width: 25%;
+  margin:1rem;
+  padding: 1rem;
 }
 
 .send-button{
