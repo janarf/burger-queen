@@ -23,3 +23,21 @@
   font-size: 1.5em;
   margin:30px auto 40px auto;
 }  
+
+.OrderItem-quantity{
+  text-align: center;
+}
+
+.OrderItem-text--big{
+  font-size: 1.3rem;
+}
+
+.delete-icon{
+  width: 1rem;
+  margin-right:1rem; 
+}
+
+.order{
+  width: 40vw;
+  padding: 1rem;
+}
